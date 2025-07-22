@@ -1,0 +1,29 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "Bot ini digunakan untuk mengelola layanan DNS dan Cloudflare Worker langsung melalui Telegram. Bot dapat: - Login menggunakan Cloudflare API Token, Account ID, dan Zone ID - Mengelola DNS Record (A & CNAME) - Deploy file JavaScript dari GitHub ke Cloudflare Worker - Upload manual file JS dan deploy sebagai Worker - Melihat & menghapus Worker - Logout",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DEDI1956/ninaxray.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/DEDI1956/ninaxray/issues"
+  },
+  "homepage": "https://github.com/DEDI1956/ninaxray#readme",
+  "dependencies": {
+    "axios": "^1.10.0",
+    "dotenv": "^17.2.0",
+    "multer": "^2.0.2",
+    "simple-git": "^3.28.0",
+    "telegraf": "^4.16.3"
+  }
+}
