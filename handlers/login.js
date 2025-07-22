@@ -1,4 +1,4 @@
-const { Scenes } = require('telegraf');
+const { Scenes, Markup } = require('telegraf');
 const cloudflare = require('../utils/cloudflare');
 
 const loginWizard = new Scenes.WizardScene(
@@ -43,7 +43,7 @@ const mainMenu = (ctx) => {
 
 module.exports = {
   scene: loginWizard,
-  commands: (bot, Markup) => {
+  commands: (bot) => {
     bot.action('login', (ctx) => ctx.scene.enter('login-wizard'));
     bot.action('main_menu', (ctx) => mainMenu(ctx));
   }

@@ -66,7 +66,7 @@ fs.readdirSync(handlersPath).forEach(file => {
   if (file.endsWith('.js')) {
     const handler = require(path.join(handlersPath, file));
     if (handler.commands) {
-      handler.commands(bot, Markup);
+      handler.commands(bot);
     }
   }
 });

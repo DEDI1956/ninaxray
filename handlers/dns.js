@@ -112,7 +112,7 @@ const deleteRecordScene = new Scenes.WizardScene(
 
 module.exports = {
   scene: [addARecordScene, addCnameRecordScene, deleteRecordScene],
-  commands: (bot, Markup) => {
+  commands: (bot) => {
     bot.action('dns_tools', (ctx) => dnsMenu(ctx));
     bot.action('add_a_record', (ctx) => ctx.scene.enter('add-a-record-wizard'));
     bot.action('add_cname_record', (ctx) => ctx.scene.enter('add-cname-record-wizard'));
