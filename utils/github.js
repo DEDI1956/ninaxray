@@ -29,8 +29,23 @@ const getFileContent = async (filePath) => {
   return fs.readFile(filePath, 'utf8');
 };
 
+const analyzeRepo = async (localPath) => {
+    const packageJsonPath = path.join(localPath, 'package.json');
+    try {
+        await fs.access(packageJsonPath);
+        const packageJson = JSON.parse(await fs.readFile(packageJsonPath, 'utf8'));
+        return {
+            buildScript: packageJson.scripts && packageJson.scripts.build,
+            mainFile: packageJson.main,
+        };
+    } catch {
+        return {};
+    }
+};
+
 module.exports = {
   cloneRepo,
   findJsFile,
   getFileContent,
+  analyzeRepo,
 };

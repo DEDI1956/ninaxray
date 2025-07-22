@@ -37,6 +37,7 @@ const mainMenu = (ctx) => {
     return ctx.reply('Pilih salah satu opsi:', Markup.inlineKeyboard([
         [Markup.button.callback('⚙️ DNS Tools', 'dns_tools')],
         [Markup.button.callback('🛠️ Worker Tools', 'worker_tools')],
+        [Markup.button.callback('🚀 Deploy Bot', 'deploy_bot')],
         [Markup.button.callback('🚪 Logout', 'logout')],
     ]));
 };
