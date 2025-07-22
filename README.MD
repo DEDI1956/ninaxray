@@ -1,93 +1,89 @@
-📦 NinaXRAY - All-in-One XRAY Auto Installer
-
-NinaXRAY adalah skrip otomatis untuk menginstal berbagai layanan penting di VPS Anda, termasuk XRAY (VLESS, VMESS, TROJAN), SSH, Dropbear, NGINX, dan lainnya dengan antarmuka menu yang menarik dan berwarna.
 
 
----
-
-✨ Fitur Utama
-
-Menampilkan informasi VPS (IP, RAM, Uptime, dll)
-
-Instalasi otomatis:
-
-XRAY (VLESS TLS & NON-TLS, VMESS, TROJAN)
-
-SSH, Dropbear
-
-NGINX, HAPROXY
-
-NOOBZVPN, UDP CUSTOM, WS-ePro
-
-
-Menampilkan hasil konfigurasi dalam format siap pakai
-
-Antarmuka menu warna-warni dan mudah dibaca
-
-Dukungan domain custom
-
-
+## Tujuan Bot:
+Bot ini digunakan untuk mengelola layanan DNS dan Cloudflare Worker langsung melalui Telegram. Bot dapat:
+- Login menggunakan Cloudflare API Token, Account ID, dan Zone ID
+- Mengelola DNS Record (A & CNAME)
+- Deploy file JavaScript dari GitHub ke Cloudflare Worker
+- Upload manual file JS dan deploy sebagai Worker
+- Melihat & menghapus Worker
+- Logout
 
 ---
 
-🚀 Cara Menggunakan
-
-1. Upload ke VPS kamu:
-
-wget https://raw.githubusercontent.com/DEDI1956/ninaxray/main/xray-installer.sh
-chmod +x xray-installer.sh
-./xray-installer.sh
-
-2. Ikuti instruksi untuk memasukkan domain.
-
-Skrip akan secara otomatis menginstal layanan dan menampilkan hasil akhir seperti:
-
-📦 XRAY INSTALL COMPLETE!
-🔗 VLESS TLS     : vless://UUID@domain:443?...
-🔗 VLESS NON-TLS : vless://UUID@domain:80?...
-🔗 VMESS TLS     : vmess://base64...
-🔗 TROJAN        : trojan://...
-🔗 DROPBEAR PORT : 443, 222
-🔗 SSH PORT      : 22
-🔗 UDP CUSTOM    : 7300
-
+## Teknologi:
+- Node.js
+- Telegraf.js
+- Axios (untuk HTTP ke Cloudflare API)
+- Multer / stream untuk file handler
+- dotenv untuk .env
+- Simple file-based session (pakai JSON)
 
 ---
 
-🧠 Informasi Tambahan
-
-Dibuat oleh: Dedi (DEDI1956)
-
-Cocok untuk Ubuntu VPS
-
-Pastikan domain yang digunakan sudah terhubung dengan IP VPS
-
-
-
----
-
-🛠️ Kontribusi
-
-Pull request terbuka untuk:
-
-Penambahan fitur baru
-
-Perbaikan bug
-
-Optimasi kode dan dokumentasi
-
-
+## Alur Bot:
+1. User kirim `/start`
+2. Bot tampilkan:
+   - Deskripsi bot
+   - Tombol `🔐 Login`
+3. Setelah klik login, bot minta:
+   - API Token
+   - Account ID
+   - Zone ID
+4. Jika valid, tampil menu fitur sebagai tombol
 
 ---
 
-📜 Lisensi
-
-Skrip ini open-source dan bebas digunakan dengan mencantumkan kredit kepada pembuat.
-
+## Fitur DNS Tools:
+- `➕ Tambah A Record`
+   - Bot minta nama domain dan IP
+   - Kirim request POST ke Cloudflare
+- `➕ Tambah CNAME`
+   - Bot minta nama dan target
+- `📃 List A Record`
+   - GET semua A record
+- `📃 List CNAME`
+   - GET semua CNAME
+- `❌ Hapus A Record`
+   - Bot tampilkan list record + tombol hapus
+- `❌ Hapus CNAME`
 
 ---
 
-> "Otomatisasi itu kekuatan. Satu skrip, semua beres!" 💡
+## Fitur Worker Tools:
+- `⚡ Deploy dari GitHub`
+   - User kirim link repo GitHub (public)
+   - Bot clone repo, cari `.js` atau `.ts`
+   - Bot minta nama Worker
+   - Upload file ke Cloudflare Worker API
+- `📥 Upload Manual JS`
+   - User kirim file JS
+   - Bot minta nama Worker
+   - Bot deploy ke Worker API
+- `📜 List Worker`
+- `🗑️ Hapus Worker`
 
+---
 
+## Fitur Tambahan:
+- `🚪 Logout`: menghapus semua data session user
+- Validasi tiap user harus login sebelum akses fitur
+- Logika error ditangani (404, 403, limit API, dll)
 
+---
+
+## Struktur Folder:
+- `index.js` → entry point
+- `handlers/` → semua fitur perintah
+- `utils/cloudflare.js` → API Cloudflare
+- `utils/github.js` → clone & extract file
+- `data/session.json` → simpan data login user
+- `.env` untuk bot token
+
+---
+
+## Siapkan file:
+- `.env`
+   - `BOT_TOKEN=xxx`
+- Gunakan `axios` dan `simple-git` untuk GitHub
+- Bot jalan dengan `node index.js` atau `npm start`
