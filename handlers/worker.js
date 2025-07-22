@@ -145,7 +145,7 @@ function streamToString(stream) {
 
 module.exports = {
   scene: [deployGithubScene, uploadManualJsScene, deleteWorkerScene],
-  commands: (bot, Markup) => {
+  commands: (bot) => {
     bot.action('worker_tools', (ctx) => workerMenu(ctx));
     bot.action('deploy_github', (ctx) => ctx.scene.enter('deploy-github-wizard'));
     bot.action('upload_manual_js', (ctx) => ctx.scene.enter('upload-manual-js-wizard'));
